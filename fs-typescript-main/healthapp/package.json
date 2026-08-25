@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "calculateBmi": "tsx bmiCalculator.ts",
-    "exerciseCalculator": "tsx exerciseCalculator"
+    "exerciseCalculator": "tsx exerciseCalculator",
+    "calculateExercises": "tsx exerciseCalculator"
   },
   "devDependencies": {
+    "@types/node": "^26.3.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
     "typescript": "^5.9.3"

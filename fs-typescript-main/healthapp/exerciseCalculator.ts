@@ -8,6 +8,26 @@ interface averageDailyExerciseTime {
   average: number;
 }
 
+interface arguments  {
+  averageDailyExerciseTime: number[];
+  targetValue: number
+}
+
+const parseArguments = (args: string[]): arguments => {
+  if (args.length < 4) throw new Error('Not enough arguments')
+  
+  const parsedArguments = process.argv.slice(2)
+  const target = Number(Number(parsedArguments[0]))
+
+  const dailyAverages = parsedArguments.slice(1).map(Number);
+
+  return {
+    averageDailyExerciseTime: dailyAverages,
+    targetValue: target
+  }
+
+}
+
 const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): averageDailyExerciseTime => {
   const periodLength = dailyExerciseHouts.length
 
@@ -18,11 +38,12 @@ const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): 
     }
   }
   
-  const sucess = trainingDays < targetValue ? false : true
 
   let totalHours = 0
   dailyExerciseHouts.map(hour => totalHours += hour)
   const average = totalHours / periodLength
+
+  const success = average >= targetValue
 
   const ratingNumber = average / targetValue
   let rating
@@ -46,7 +67,7 @@ const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): 
   return {
     periodLength: periodLength,
     trainingDays: trainingDays,
-    sucess: sucess,
+    sucess: success,
     rating: rating,
     ratingDescription: ratingDescription,
     target: target,
@@ -55,4 +76,15 @@ const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): 
   }
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+try {
+  const {averageDailyExerciseTime, targetValue} = parseArguments(process.argv)
+
+  console.log(calculateExercises(averageDailyExerciseTime, targetValue))
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happende.'
+  if( error instanceof Error) {
+    errorMessage += ' Error: ' + error.message
+  }
+  console.log(errorMessage)
+}
+
