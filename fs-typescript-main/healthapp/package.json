@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "calculateBmi": "tsx bmiCalculator.ts"
+    "calculateBmi": "tsx bmiCalculator.ts",
+    "exerciseCalculator": "tsx exerciseCalculator"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
