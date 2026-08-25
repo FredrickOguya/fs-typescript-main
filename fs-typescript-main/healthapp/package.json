@@ -5,12 +5,18 @@
   "scripts": {
     "calculateBmi": "tsx bmiCalculator.ts",
     "exerciseCalculator": "tsx exerciseCalculator",
-    "calculateExercises": "tsx exerciseCalculator"
+    "calculateExercises": "tsx exerciseCalculator",
+    "start": "tsx index.ts",
+    "dev": "tsx --watch index.ts"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^26.3.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
