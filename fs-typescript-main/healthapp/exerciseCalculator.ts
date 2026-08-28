@@ -28,19 +28,19 @@ const parseArguments = (args: string[]): arguments => {
 
 }
 
-const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): averageDailyExerciseTime => {
-  const periodLength = dailyExerciseHouts.length
+export const calculateExercises = (dailyExerciseHours: number[], targetValue: number): averageDailyExerciseTime => {
+  const periodLength = dailyExerciseHours.length
 
   let trainingDays = 0
-  for(let i= 0; i<=dailyExerciseHouts.length - 1; i++){
-    if(dailyExerciseHouts[i] > 0){
+  for(let i= 0; i<=dailyExerciseHours.length - 1; i++){
+    if(dailyExerciseHours[i] > 0){
       trainingDays += 1;
     }
   }
   
 
   let totalHours = 0
-  dailyExerciseHouts.map(hour => totalHours += hour)
+  dailyExerciseHours.map(hour => totalHours += hour)
   const average = totalHours / periodLength
 
   const success = average >= targetValue
@@ -51,7 +51,7 @@ const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): 
 
   if ( ratingNumber <= 0.5) {
     rating = 1
-    ratingDescription = 'Put more effort'
+    ratingDescription = 'bad'
   } else if (ratingNumber > 0.5 && ratingNumber < 1){
     rating = 2
     ratingDescription = 'not too bad but could be better'
