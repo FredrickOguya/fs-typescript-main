@@ -1,32 +1,32 @@
 interface averageDailyExerciseTime {
   periodLength: number;
   trainingDays: number;
-  sucess: boolean;
+  success: boolean;
   rating: number;
   ratingDescription: string;
   target: number;
   average: number;
 }
 
-interface arguments  {
-  averageDailyExerciseTime: number[];
-  targetValue: number
-}
+// interface arguments  {
+//   averageDailyExerciseTime: number[];
+//   targetValue: number
+// }
 
-const parseArguments = (args: string[]): arguments => {
-  if (args.length < 4) throw new Error('Not enough arguments')
+// const parseArguments = (args: string[]): arguments => {
+//   if (args.length < 4) throw new Error('Not enough arguments')
   
-  const parsedArguments = process.argv.slice(2)
-  const target = Number(Number(parsedArguments[0]))
+//   const parsedArguments = process.argv.slice(2)
+//   const target = Number(Number(parsedArguments[0]))
 
-  const dailyAverages = parsedArguments.slice(1).map(Number);
+//   const dailyAverages = parsedArguments.slice(1).map(Number);
 
-  return {
-    averageDailyExerciseTime: dailyAverages,
-    targetValue: target
-  }
+//   return {
+//     averageDailyExerciseTime: dailyAverages,
+//     targetValue: target
+//   }
 
-}
+// }
 
 export const calculateExercises = (dailyExerciseHours: number[], targetValue: number): averageDailyExerciseTime => {
   const periodLength = dailyExerciseHours.length
@@ -67,7 +67,7 @@ export const calculateExercises = (dailyExerciseHours: number[], targetValue: nu
   return {
     periodLength: periodLength,
     trainingDays: trainingDays,
-    sucess: success,
+    success: success,
     rating: rating,
     ratingDescription: ratingDescription,
     target: target,
@@ -76,15 +76,15 @@ export const calculateExercises = (dailyExerciseHours: number[], targetValue: nu
   }
 }
 
-try {
-  const {averageDailyExerciseTime, targetValue} = parseArguments(process.argv)
+// try {
+//   const {averageDailyExerciseTime, targetValue} = parseArguments(process.argv)
 
-  console.log(calculateExercises(averageDailyExerciseTime, targetValue))
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happende.'
-  if( error instanceof Error) {
-    errorMessage += ' Error: ' + error.message
-  }
-  console.log(errorMessage)
-}
+//   console.log(calculateExercises(averageDailyExerciseTime, targetValue))
+// } catch (error: unknown) {
+//   let errorMessage = 'Something bad happende.'
+//   if( error instanceof Error) {
+//     errorMessage += ' Error: ' + error.message
+//   }
+//   console.log(errorMessage)
+// }
 

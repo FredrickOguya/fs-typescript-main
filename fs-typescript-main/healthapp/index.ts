@@ -17,13 +17,13 @@ app.get('/bmi', (req, res) => {
   const weightNumber = Number(weight)
 
   if (isNaN(heightNumber) || isNaN(weightNumber)){
-    res.status(400).json({
+    return res.status(400).json({
       error: 'malformatted parameters'
     })
   }
   const bmi = calculateBmi(Number(height), Number(weight))
 
-  res.send({
+  return res.send({
     "weight": weightNumber,
     "height": heightNumber,
     bmi
@@ -51,7 +51,7 @@ app.post('/exercises', (req,res) => {
   
   const exercisesSummary = calculateExercises(daily_exercises, target)
 
-  res.send(
+  return res.send(
     exercisesSummary
   )
 })
