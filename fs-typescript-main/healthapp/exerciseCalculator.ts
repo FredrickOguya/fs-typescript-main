@@ -46,8 +46,8 @@ const calculateExercises = (dailyExerciseHouts: number[], targetValue: number): 
   const success = average >= targetValue
 
   const ratingNumber = average / targetValue
-  let rating
-  let ratingDescription
+  let rating: number
+  let ratingDescription: string
 
   if ( ratingNumber <= 0.5) {
     rating = 1

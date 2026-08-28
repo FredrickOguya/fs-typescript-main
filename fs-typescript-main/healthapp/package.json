@@ -7,14 +7,19 @@
     "exerciseCalculator": "tsx exerciseCalculator",
     "calculateExercises": "tsx exerciseCalculator",
     "start": "tsx index.ts",
-    "dev": "tsx --watch index.ts"
+    "dev": "tsx --watch index.ts",
+    "lint": "eslint"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/express": "^5.0.6",
     "@types/node": "^26.3.0",
+    "eslint": "^10.9.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.68.0"
   },
   "dependencies": {
     "express": "^5.2.1"
