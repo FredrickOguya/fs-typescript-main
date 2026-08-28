@@ -32,7 +32,10 @@ app.get('/bmi', (req, res) => {
 })
 
 app.post('/exercises', (req,res) => {
-  const {daily_exercises, target} = req.body;
+  const {daily_exercises, target} = req.body as {
+    daily_exercises: unknown,
+    target: unknown
+  };
 
   if (daily_exercises === undefined || target === undefined) {
     return res.status(400).json({
@@ -49,7 +52,7 @@ app.post('/exercises', (req,res) => {
     })
   }
   
-  const exercisesSummary = calculateExercises(daily_exercises, target)
+  const exercisesSummary = calculateExercises(daily_exercises.map(e => Number(e)), Number(target))
 
   return res.send(
     exercisesSummary
