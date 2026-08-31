@@ -1,4 +1,7 @@
-const data = [
+import type { PatientsEntry } from '../types.ts';
+
+
+const patientsEntries: PatientsEntry[] = [
     {
         "id": "d2773336-f723-11e9-8f0b-362b9e155667",
         "name": "John McClane",
@@ -41,4 +44,4 @@ const data = [
     }
 ];
 
-export default data;
+export default patientsEntries;
