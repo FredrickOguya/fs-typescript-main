@@ -10,7 +10,8 @@
     "tsc": "tsc",
     "dev": "tsx --watch ./src/index.ts",
     "start": "tsx index.js",
-    "test": "npm test"
+    "test": "npm test",
+    "lint": "eslint ."
   },
   "dependencies": {
     "cors": "^2.8.6",
