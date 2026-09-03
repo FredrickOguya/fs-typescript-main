@@ -24,6 +24,7 @@ export const NewPatientSchema = z.object({
 });
 
 export type NonSensitivePatientsEntry = Omit<PatientsEntry, 'ssn'>;
+export type NewPatient = Omit<PatientsEntry, 'id'>;
 export type Gender = typeof Gender[keyof typeof Gender];
 export type NewPatientEntry = z.infer<typeof NewPatientSchema>;
 export interface PatientsEntry extends NewPatientEntry {
