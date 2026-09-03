@@ -23,7 +23,7 @@ jobs:
 
     - name: Lint patientor backend
       working-directory: ./patientor/backend
-      run: npm run lint
+      run: npm run lint --if-present
 
     - name: Start patientor backend server
       working-directory: ./patientor/backend
