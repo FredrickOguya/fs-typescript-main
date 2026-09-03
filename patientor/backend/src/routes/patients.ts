@@ -1,26 +1,26 @@
-import express from 'express';
+
+import express, { type Request, type Response, type NextFunction} from 'express';
 import patientServices from '../services/patients.ts';
-import parseNewPatientEntry from '../utils.ts';
+import { NewPatientSchema, type NewPatientEntry, type PatientsEntry } from '../types.ts';
 
 const router = express.Router();
-
+ 
+const newPatientParser = (req: Request, _res: Response, next: NextFunction) => {
+  try {
+    NewPatientSchema.parse(req.body);
+    next();
+  } catch (error: unknown) {
+    next(error);
+  }
+};
 router.get('/', (_req, res) => {
   const data = patientServices.getNonSensitivePatientEntry();
   res.send(data);
 });
 
-router.post('/', (req, res) => {
-  try{
-    const newPatientEntry = parseNewPatientEntry(req.body);
-    const addedPatient = patientServices.addPatient(newPatientEntry);
-    res.json(addedPatient);
-  } catch (error: unknown) {
-    let errorMessage = 'Something Went wrong.';
-    if( error instanceof Error) {
-      errorMessage += ' Error: ' + error.message;
-    }
-    res.status(400).send(errorMessage);
-  }
+router.post('/', newPatientParser, (req: Request<unknown, unknown, NewPatientEntry>, res: Response<PatientsEntry>) => {
+  const addedEntry = patientServices.addPatient(req.body);
+  res.json(addedEntry);
   
 });
 
