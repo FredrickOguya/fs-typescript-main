@@ -6,7 +6,12 @@ interface TotalExercisesProps {
 }
 
 const Total = (props: TotalExercisesProps) => {
-  return `Number of exercises ${props.courseParts.reduce((sum, part) => sum + part.exerciseCount, 0)}`
+  return (
+    <div>
+      <br />
+      Number of exercises {props.courseParts.reduce((sum, part) => sum + part.exerciseCount, 0)}
+    </div>
+   )
 }
 
 export default Total;
