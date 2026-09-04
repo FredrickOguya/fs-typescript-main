@@ -64,33 +64,42 @@ function App() {
       
     }
       <form onSubmit={createDiary}>
-        date:<input type="text"
+        date:<input type="date"
           value={date}
           onChange={({target}) => setDate(target.value)}
         />
         <br />
         <label>
-          Visibility: 
-          <select value={visibility}
-          onChange={({target}) => setVisibility(target.value as Visibility)}>
-        
+          Visibility:
+        </label>
         {
           Object.values(Visibility).map(visibilityOption => (
-            <option key={visibilityOption} value={visibilityOption}>{visibilityOption}</option>
+            <label key={visibilityOption}>{visibilityOption} 
+            <input
+             type='radio'
+             value={visibilityOption}
+             checked = {visibility === visibilityOption}
+             onChange={({target}) => setVisibility(target.value as Visibility)}
+            /></label>
           )) 
         }
-        </select>
-        </label>
+
+        
         <br />
-        <label>Weather: 
-          <select value={weather} 
-          onChange={({target}) => setWeather(target.value as Weather)} >
-            {
-              Object.values(Weather).map(weatherOption => (
-                <option key={weatherOption} value={weatherOption}>{weatherOption }</option>
-              ))
-            }</select>
-        </label>
+        <label>Weather: </label>
+          {
+            Object.values(Weather).map(weatherOption => (
+              <label> {weatherOption}
+                <input
+                 type="radio" 
+                 value={weatherOption}
+                 checked={weather === weatherOption}
+                 onChange={({target}) => setWeather(target.value as Weather)}
+                />
+              </label>
+            ))
+          }
+        
         
         <br />
         Comment: <input
