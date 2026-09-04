@@ -1,5 +1,5 @@
 import diaryEntries from '../../data/entries.ts';
-import type { DiaryEntry, NonSensitiveDiaryEntry, NewDiaryEntry } from '../types.ts';
+import type { DiaryEntry, NonSensitiveDiaryEntry, NewDiaryEntry } from '../../../types/types.ts';
 
 const diaries = diaryEntries;
 

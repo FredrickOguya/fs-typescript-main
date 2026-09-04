@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from 'express';
 import diaryService from '../services/diaryService.ts';
-import { type DiaryEntry, type NewDiaryEntry, type NonSensitiveDiaryEntry } from '../types.ts';
+import { type DiaryEntry, type NewDiaryEntry, type NonSensitiveDiaryEntry } from '../../../types/types.ts';
 import { newDiaryParser, errorMiddleware } from '../middleware.ts';
 
 const router = express.Router();
