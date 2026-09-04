@@ -8,6 +8,7 @@ function App() {
   const [weather, setWeather] = useState<Weather>(Weather.Sunny)
   const [visibility, setVisibility] = useState<Visibility>(Visibility.Great)
   const [comment, setComment] = useState('')
+  const [error, setError] = useState('')
 
 
 
@@ -26,26 +27,42 @@ function App() {
       comment
     }
 
-    const response = await fetch('http://localhost:3000/api/diaries', {
+    try {
+      const response = await fetch('http://localhost:3000/api/diaries', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(diaryToAdd)
-    })
+      })
 
-    const newDiary: NonSensitiveDiaryEntry = await response.json()
+      if(!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error)
+      }
 
-    setDiaries(diaries.concat(newDiary))
+      const newDiary: NonSensitiveDiaryEntry = await response.json()
 
-    setDate('')
-    setWeather(Weather.Sunny)
-    setVisibility(Visibility.Great)
-    setComment('')
+      setDiaries(diaries.concat(newDiary))
+
+      setDate('')
+      setWeather(Weather.Sunny)
+      setVisibility(Visibility.Great)
+      setComment('')
+    } catch (error) {
+      if(error instanceof Error) {
+        setError(error.message)
+      }
+    }
   }
 
   return (
     <div>
+      {error &&  (
+        <div style={{ color: 'red'}}>Error: {error}</div>
+      )
+      
+    }
       <form onSubmit={createDiary}>
         date:<input type="text"
           value={date}
