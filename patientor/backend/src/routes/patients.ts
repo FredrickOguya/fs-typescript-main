@@ -1,7 +1,7 @@
 
 import express, { type Request, type Response, type NextFunction} from 'express';
 import patientServices from '../services/patients.ts';
-import { NewPatientSchema, type NewPatientEntry, type PatientsEntry } from '../types.ts';
+import { NewPatientSchema, type NewPatientEntry, type Patient } from '../types.ts';
 
 const router = express.Router();
  
@@ -18,7 +18,13 @@ router.get('/', (_req, res) => {
   res.send(data);
 });
 
-router.post('/', newPatientParser, (req: Request<unknown, unknown, NewPatientEntry>, res: Response<PatientsEntry>) => {
+router.get('/:id', (req,res) => {
+  const id = req.params.id;
+  const patient = patientServices.getById(id);
+  res.send(patient);
+});
+
+router.post('/', newPatientParser, (req: Request<unknown, unknown, NewPatientEntry>, res: Response<Patient>) => {
   const addedEntry = patientServices.addPatient(req.body);
   res.json(addedEntry);
   
