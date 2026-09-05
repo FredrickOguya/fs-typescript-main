@@ -20,13 +20,14 @@ export const NewPatientSchema = z.object({
   dateOfBirth: z.iso.date(),
   ssn: z.string(),
   gender: z.enum(Gender),
-  occupation: z.string()
+  occupation: z.string(),
+  entries: z.array(z.string())
 });
 
-export type NonSensitivePatientsEntry = Omit<PatientsEntry, 'ssn'>;
-export type NewPatient = Omit<PatientsEntry, 'id'>;
+export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;
+export type NewPatient = Omit<Patient, 'id'>;
 export type Gender = typeof Gender[keyof typeof Gender];
 export type NewPatientEntry = z.infer<typeof NewPatientSchema>;
-export interface PatientsEntry extends NewPatientEntry {
+export interface Patient extends NewPatientEntry {
   id: string;
 }
