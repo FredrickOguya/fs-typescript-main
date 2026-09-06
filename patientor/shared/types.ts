@@ -17,7 +17,7 @@ interface BaseEntry {
   description: string;
   date: string;
   specialist: string;
-  diagnosisCodes?: string[];
+  diagnosisCodes?: string[] | undefined;
 }
 
 const HealthCheckRating = {
@@ -48,7 +48,7 @@ export type Discharge = {
 export interface OccupationalHealthcareEntry extends BaseEntry {
   type: 'OccupationalHealthcare';
   employerName: string;
-  sickLeave?: SickLeave;
+  sickLeave?: SickLeave | undefined;
 }
 
 export interface HospitalEntry extends BaseEntry {

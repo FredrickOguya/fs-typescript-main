@@ -1,4 +1,4 @@
-import type { Diagnosis } from "../src/types.ts";
+import type { Diagnosis } from "../../shared/types.ts";
 
 const diagnosesEntries: Diagnosis[] = [
   {

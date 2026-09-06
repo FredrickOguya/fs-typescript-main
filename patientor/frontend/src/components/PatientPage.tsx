@@ -6,14 +6,15 @@ import {
   Divider
 } from "@mui/material";
 
-import { Patient } from "../../../shared/types";
+import { Diagnosis, Patient } from "../../../shared/types";
 import { Female, Male } from "@mui/icons-material";
 
 interface Props {
   patient: Patient | null | undefined;
+  diagnoses: Diagnosis[];
 }
 
-const PatientPage = ({ patient }: Props) => {
+const PatientPage = ({ patient, diagnoses }: Props) => {
   if (!patient) {
     return (
       <Typography variant="h6">
@@ -52,19 +53,27 @@ const PatientPage = ({ patient }: Props) => {
           }
 
           <Typography>
-            <strong>Entries</strong>
+            <strong>Entries: </strong>
+          </Typography>
             {
               patient.entries.map(e => (
-                <div>
-                  <p>{e.date} {e.description}</p> 
-                  {e.diagnosisCodes?.map(c => (
-                    <li>{c}</li>
-                  ))}
+                <div key={e.id}>
+                  <Typography>
+                    {e.date} {e.description}
+                  </Typography>
+                  <ul>
+                    {e.diagnosisCodes?.map(code => {
+                    const diagnosis = diagnoses.find(d => d.code === code);
+
+                      return (
+                    <li key={code}>{code} {diagnosis?.name}</li>
+                    );
+                    })}
+                  </ul>
                 </div>
                 
               ))
             }
-          </Typography>
         </Stack>
       </CardContent>
     </Card>
