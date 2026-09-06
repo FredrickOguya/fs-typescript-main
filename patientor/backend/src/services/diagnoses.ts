@@ -1,8 +1,8 @@
 import diagnosesEntries from '../data/diagnoses.ts';
-import type { Diagnosis } from '../types.ts';
+import type { Diagnosis } from '../../../shared/types.ts';
 
 const getDiagnosis = (): Diagnosis[] => {
-  return diagnosesEntries;
+  return diagnosesEntries as Diagnosis[];
 };
 
 export default {

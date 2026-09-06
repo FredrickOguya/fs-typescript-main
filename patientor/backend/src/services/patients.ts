@@ -1,8 +1,8 @@
-import type { NewPatient, NonSensitivePatient, Patient } from '../types.ts';
 import { v1 } from 'uuid';
 import patientsData from '../../data/patients.ts';
+import type { NewPatient, NonSensitivePatient, Patient } from '../../../shared/types.ts';
 
-const patients: Patient[] = patientsData;
+const patients = patientsData;
 
 const getPatients = (): Patient[] => {
   return patients;
@@ -10,7 +10,7 @@ const getPatients = (): Patient[] => {
 
 
 const getNonSensitivePatientEntry = (): NonSensitivePatient[] => {
-  return patients.map(({ id, name, dateOfBirth, gender, occupation, entries}) => ({
+   return patients.map(({ id, name, dateOfBirth, gender, occupation, entries}) => ({
     id,
     name,
     dateOfBirth,

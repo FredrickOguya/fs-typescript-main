@@ -6,7 +6,7 @@ import {
   Divider
 } from "@mui/material";
 
-import { Patient } from "../types";
+import { Patient } from "../../../shared/types";
 import { Female, Male } from "@mui/icons-material";
 
 interface Props {
@@ -50,6 +50,21 @@ const PatientPage = ({ patient }: Props) => {
             <strong>Gender:</strong> {patient.gender}
           </Typography>
           }
+
+          <Typography>
+            <strong>Entries</strong>
+            {
+              patient.entries.map(e => (
+                <div>
+                  <p>{e.date} {e.description}</p> 
+                  {e.diagnosisCodes?.map(c => (
+                    <li>{c}</li>
+                  ))}
+                </div>
+                
+              ))
+            }
+          </Typography>
         </Stack>
       </CardContent>
     </Card>

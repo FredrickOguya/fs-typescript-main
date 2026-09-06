@@ -1,7 +1,8 @@
 
 import express, { type Request, type Response, type NextFunction} from 'express';
 import patientServices from '../services/patients.ts';
-import { NewPatientSchema, type NewPatientEntry, type Patient } from '../types.ts';
+import { type Patient } from '../../../shared/types.ts';
+import { NewPatientSchema, type NewPatientEntry } from '../types.ts';
 
 const router = express.Router();
  
