@@ -1,6 +1,6 @@
 import type { NewPatient, NonSensitivePatient, Patient } from '../types.ts';
 import { v1 } from 'uuid';
-import patientsData from '../data/patients.ts';
+import patientsData from '../../data/patients.ts';
 
 const patients: Patient[] = patientsData;
 
