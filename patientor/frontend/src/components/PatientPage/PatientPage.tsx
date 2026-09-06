@@ -6,8 +6,10 @@ import {
   Divider
 } from "@mui/material";
 
-import { Diagnosis, Patient } from "../../../shared/types";
+import { Diagnosis, Patient } from "../../../../shared/types";
 import { Female, Male } from "@mui/icons-material";
+import EntryDetails from "./EntryDetails";
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 
 interface Props {
   patient: Patient | null | undefined;
@@ -59,8 +61,11 @@ const PatientPage = ({ patient, diagnoses }: Props) => {
               patient.entries.map(e => (
                 <div key={e.id}>
                   <Typography>
-                    {e.date} {e.description}
+                    {e.date} <MedicalServicesIcon /> <br />{e.description}
                   </Typography>
+
+                  <EntryDetails entry={e} />
+
                   <ul>
                     {e.diagnosisCodes?.map(code => {
                     const diagnosis = diagnoses.find(d => d.code === code);
