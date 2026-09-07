@@ -1,15 +1,11 @@
+
 export interface Diagnosis {
   code: string;
   name: string;
   latin?: string;
 }
 
-export const Gender = {
-  male: 'male',
-  female: 'female',
-  Other: 'other'
-} as const;
-
+export const Gender = ['male', 'female', 'other'] as const;
 export type Gender = typeof Gender[keyof typeof Gender];
 
 interface BaseEntry {
@@ -20,7 +16,7 @@ interface BaseEntry {
   diagnosisCodes?: string[] | undefined;
 }
 
-const HealthCheckRating = {
+export const HealthCheckRating = {
   Healthy: 0,
   LowRisk: 1,
   HighRisk: 2,
@@ -76,3 +72,4 @@ export type NonSensitivePatient = Omit<Patient, 'ssn'>;
 export type NewPatient = Omit<Patient, 'id'>;
 
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
+
