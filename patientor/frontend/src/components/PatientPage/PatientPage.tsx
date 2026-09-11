@@ -6,17 +6,20 @@ import {
   Divider
 } from "@mui/material";
 
-import { Diagnosis, Patient } from "../../../../shared/types";
+import { Diagnosis, NewHealthCheckEntry, Patient } from "../../../../shared/types";
 import { Female, Male } from "@mui/icons-material";
 import EntryDetails from "./EntryDetails";
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import patientService from '../../services/patients';
+import HealthCheckForm from "../HealthCheckForm";
 
 interface Props {
   patient: Patient | null | undefined;
   diagnoses: Diagnosis[];
+  setPatients: React.Dispatch<React.SetStateAction<Patient[]>>
 }
 
-const PatientPage = ({ patient, diagnoses }: Props) => {
+const PatientPage = ({ patient, diagnoses, setPatients }: Props) => {
   if (!patient) {
     return (
       <Typography variant="h6">
@@ -24,6 +27,18 @@ const PatientPage = ({ patient, diagnoses }: Props) => {
       </Typography>
     );
   }
+
+  const submitNewEntry = async (entry: NewHealthCheckEntry) => {
+    const newEntry = await patientService.addEntry(patient.id, entry);
+    setPatients(currentPatients =>
+    currentPatients.map(p =>
+      p.id === patient.id
+        ? { ...p, entries: [...p.entries, newEntry] }
+        : p
+    )
+);
+
+  };
 
   return (
     <Card sx={{ marginTop: 3 }}>
@@ -80,6 +95,7 @@ const PatientPage = ({ patient, diagnoses }: Props) => {
               ))
             }
         </Stack>
+        <HealthCheckForm onSubmit={submitNewEntry}/>
       </CardContent>
     </Card>
   );
