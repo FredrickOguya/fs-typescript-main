@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HealthCheckRating, NewHealthCheckEntry } from "../../../shared/types";
+import { HealthCheckRating, NewHealthCheckEntry } from "../../../../shared/types";
 import { Button, Stack, TextField } from "@mui/material";
 interface props {
   onSubmit: (entry: NewHealthCheckEntry) => void;
@@ -40,7 +40,7 @@ const HealthCheckForm = ({ onSubmit }: props) => {
   return <form onSubmit={submit}>
     <Stack spacing={2} maxWidth={400}>
       <TextField id="description" label="description" value={description} onChange={({target}) => setDescription(target.value)} />
-      <TextField id="date" value={date} type="date" onChange={({target}) => setDate(target.value)}/>
+      <TextField id="date" value={date} label="Date" slotProps={{inputLabel: {shrink: true}}} type="date" onChange={({target}) => setDate(target.value)}/>
       <TextField id="specialist" label="specialist" value={specialist} onChange={({ target }) => setSpecialist(target.value)}/>
       <TextField id="healthCheckRating" label="healthCheckRating" value={healthCheckRating} onChange={handleRatingChange}/>
     <Button type="submit">Submit</Button>

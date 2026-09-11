@@ -3,15 +3,27 @@ import {
   CardContent,
   Typography,
   Stack,
-  Divider
+  Divider,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from "@mui/material";
 
-import { Diagnosis, NewHealthCheckEntry, Patient } from "../../../../shared/types";
+import {
+  Diagnosis,
+  Entry,
+  NewEntry,
+  Patient
+} from "../../../../shared/types";
 import { Female, Male } from "@mui/icons-material";
 import EntryDetails from "./EntryDetails";
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import patientService from '../../services/patients';
-import HealthCheckForm from "../HealthCheckForm";
+import HealthCheckForm from "./HealthCheckForm";
+import { useState } from "react";
+import HospitalForm from "./HospitalForm";
+import OccupationalHealthcareForm from "./OccupationalHealthCareForm";
 
 interface Props {
   patient: Patient | null | undefined;
@@ -20,6 +32,7 @@ interface Props {
 }
 
 const PatientPage = ({ patient, diagnoses, setPatients }: Props) => {
+  const [entryType, setEntryType] = useState<Entry["type"]>("HealthCheck");
   if (!patient) {
     return (
       <Typography variant="h6">
@@ -28,7 +41,9 @@ const PatientPage = ({ patient, diagnoses, setPatients }: Props) => {
     );
   }
 
-  const submitNewEntry = async (entry: NewHealthCheckEntry) => {
+  const submitNewEntry = async (
+    entry: NewEntry
+  ) => {
     const newEntry = await patientService.addEntry(patient.id, entry);
     setPatients(currentPatients =>
     currentPatients.map(p =>
@@ -95,7 +110,25 @@ const PatientPage = ({ patient, diagnoses, setPatients }: Props) => {
               ))
             }
         </Stack>
-        <HealthCheckForm onSubmit={submitNewEntry}/>
+
+        <FormControl fullWidth sx={{mb: 4}}>
+          <InputLabel id="type">Type</InputLabel>
+          <Select
+            labelId="type"
+            id="type-select"
+            value={entryType}
+            label="Type"
+            onChange={({target}) => setEntryType(target.value)}
+          >
+            <MenuItem value="HealthCheck">HealthCheck</MenuItem>
+            <MenuItem value="Hospital">Hospital</MenuItem>
+            <MenuItem value="OccupationalHealthcare">OccupationalHealthCare</MenuItem>
+          </Select>
+        </FormControl>
+        { entryType === "HealthCheck" && <HealthCheckForm onSubmit={ submitNewEntry}/> } 
+        { entryType === "Hospital" && <HospitalForm onSubmit={ submitNewEntry}/> } 
+        { entryType === "OccupationalHealthcare" && <OccupationalHealthcareForm onSubmit={submitNewEntry}/> }
+       
       </CardContent>
     </Card>
   );
