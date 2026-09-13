@@ -7,7 +7,8 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
+  SelectChangeEvent
 } from "@mui/material";
 
 import {
@@ -55,6 +56,9 @@ const PatientPage = ({ patient, diagnoses, setPatients }: Props) => {
 
   };
 
+  const onSelectChange = (event: SelectChangeEvent<string>) => {
+    setEntryType(event.target.value as Entry["type"]);
+  };
   return (
     <Card sx={{ marginTop: 3 }}>
       <CardContent>
@@ -118,16 +122,16 @@ const PatientPage = ({ patient, diagnoses, setPatients }: Props) => {
             id="type-select"
             value={entryType}
             label="Type"
-            onChange={({target}) => setEntryType(target.value)}
+            onChange={onSelectChange}
           >
             <MenuItem value="HealthCheck">HealthCheck</MenuItem>
             <MenuItem value="Hospital">Hospital</MenuItem>
-            <MenuItem value="OccupationalHealthcare">OccupationalHealthCare</MenuItem>
+            <MenuItem value="OccupationalHealthcare">OccupationalHealthcare</MenuItem>
           </Select>
         </FormControl>
-        { entryType === "HealthCheck" && <HealthCheckForm onSubmit={ submitNewEntry}/> } 
-        { entryType === "Hospital" && <HospitalForm onSubmit={ submitNewEntry}/> } 
-        { entryType === "OccupationalHealthcare" && <OccupationalHealthcareForm onSubmit={submitNewEntry}/> }
+        { entryType === "HealthCheck" && <HealthCheckForm diagnoses={diagnoses} onSubmit={ submitNewEntry}/> } 
+        { entryType === "Hospital" && <HospitalForm diagnoses={diagnoses} onSubmit={ submitNewEntry}/> } 
+        { entryType === "OccupationalHealthcare" && <OccupationalHealthcareForm diagnoses={diagnoses} onSubmit={submitNewEntry}/> }
        
       </CardContent>
     </Card>
